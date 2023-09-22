@@ -4,13 +4,14 @@ import syntax
 def __parse(M): # returns [depth,location]
     id = M.rfind(syntax.M)
     location = M[id+1:len(M)]
+    print("parse"+M+":"+str(id+1)+","+location)
     if not location[0].isdigit():
         location = config.names[location]
     return id+1, location
 
 def __load(M): # puts M into A, without using D
     depth, location = __parse(M)
-    code = "@"+location
+    code = "\n@"+location
     for i in range(depth):
         code = code+"\nA = M"
     return code
@@ -22,17 +23,17 @@ def __store(M): # puts D into M, without using anything else
     depth, location = __parse(M)
     if depth == 0:
         return "ERROR with "+M
-    code = "@"+location
+    code = "\n@"+location
     for i in range(depth-1):
         code = "\nA = M"
     code = code+"\nM = D"
     return code
 
-def general_operator(MD, MS1, MS2, OP):
+def general_operation(MD, MS1, OP, MS2):
     return "\n// "+MD+" = "+MS1+" "+OP+" "+MS2+__load(MS1)+__save()+__load(MS2)+"\nD = D "+OP+" A"+__store(MD)
 
 def general_assignment(MD, MS):
-    return "\n// "+MD+" = "+MS__load(MS)+__save()+__store(MD)
+    return "\n// "+MD+" = "+MS+__load(MS)+__save()+__store(MD)
 
 def push(M): # loads M into the stack
     SP = syntax.M+config.sp
