@@ -29,6 +29,9 @@ def __store(M): # puts D into M, without using anything else
     code = code+"\nM = D"
     return code
 
+def goto(name):
+    return "\n@"+name+"\n0 ; JMP"
+
 def general_operation(MD, MS1, OP, MS2):
     return "\n// "+MD+" = "+MS1+" "+OP+" "+MS2+__load(MS1)+__save()+__load(MS2)+"\nD = D "+OP+" A"+__store(MD)
 
@@ -50,7 +53,7 @@ def pop(M): # pops and puts value into M
     return "//pop stack into "+M+__load(MSP)+save()+__store(M)+dec(SP)
 
 def terminate():
-    return  "\n// terminate the program\n@"+config.END+"\n("+config.END+")"+"\n0 ; JMP"
+    return  "\n// terminate the program"+goto(config.END)
 
 def return_snippet():
     return "\n// return to calling function\n@"+config.ra+"\nA = M\n0 ; JMP"

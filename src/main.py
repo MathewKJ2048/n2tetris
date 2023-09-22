@@ -24,6 +24,8 @@ def process(line):
             return snippets.push(tokens[2])
         elif tokens[1] == syntax.pop:
             return snippets.pop(tokens[2])
+        elif tokens[1] == syntax.goto:
+            return snippets.goto(tokens[2])
         elif tokens[1][0] == syntax.M:
             if len(tokens) == 6:
                 return snippets.general_operation(tokens[1], tokens[3], tokens[4], tokens[5])

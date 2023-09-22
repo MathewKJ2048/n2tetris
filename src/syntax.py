@@ -1,9 +1,9 @@
-# M*n is any number of occurances of M followed by alphanumeric string
+# M*n is any number of occurences of M followed by alphanumeric string
 # name is a string referring to a location which already exists
 # arguments listed as comment
 # all instructions start with directive
-# general operation: M*n = M*n OP M*n has no keyword (for brevity)
-# general assignment: M*n = M*n has no keyword (for brevity)
+# general operation: M*n = M*n OP M*n 
+# general assignment: M*n = M*n
 
 directive = '-'
 terminate = "terminate"
@@ -16,6 +16,7 @@ dec = "dec"      # M*n
 return_ = "return"
 M = "M"
 stack = "stack"  # value, specifies starting point of stack
+goto = "goto"    # name
 
 less = "<"
 less_eq = "<="
